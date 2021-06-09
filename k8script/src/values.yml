@@ -1,0 +1,5 @@
+cbm-workflow:
+  registry: "registry1.corpo.t-mobile.pl/bscs"
+  replicaCount: 1
+  port: 8082
+  version: 0.0.0

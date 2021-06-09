@@ -1,0 +1,34 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+    app: sam-api-srv
+  name: sam-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sam-api-srv
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: sam-api-srv
+    spec:
+      containers:
+      - name: sam-api-srv-pod
+        env:
+        image: registry1.corpo.t-mobile.pl/sam/sam-api:0.0.23
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 1
+            memory: 300M

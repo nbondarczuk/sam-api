@@ -1,0 +1,56 @@
+--------------------------------------------------------
+--  DDL for Table
+--------------------------------------------------------
+
+CREATE OR REPLACE FORCE VIEW CGSYSADM.SAP_ACCOUNTS_P
+(
+ 	   STATUS,
+	   RELEASE_ID,
+	   BSCS_ACCOUNT,
+	   OFI_SAP_ACCOUNT,
+	   VALID_FROM_DATE,
+	   VAT_CODE_IND,
+	   OFI_SAP_WBS_CODE,
+	   CIT_MARKER_VAT_FLAG,
+	   ENTRY_DATE,
+	   ENTRY_OWNER,
+	   UPDATE_DATE,
+	   UPDATE_OWNER,
+	   RELEASE_DATE,
+	   RELEASE_OWNER
+)
+AS
+SELECT
+ 	   STATUS,
+	   RELEASE_ID,
+	   BSCS_ACCOUNT,
+	   OFI_SAP_ACCOUNT,
+	   VALID_FROM_DATE,
+	   VAT_CODE_IND,
+	   OFI_SAP_WBS_CODE,
+	   CIT_MARKER_VAT_FLAG,
+	   ENTRY_DATE,
+	   ENTRY_OWNER,
+	   UPDATE_DATE,
+	   UPDATE_OWNER,
+	   RELEASE_DATE,
+	   RELEASE_OWNER
+FROM CGSYSADM.SAP_ACCOUNTS Q
+WHERE STATUS = 'P'
+AND RELEASE_ID = (SELECT MAX(RELEASE_ID) FROM CGSYSADM.SAP_ACCOUNTS SQ WHERE SQ.BSCS_ACCOUNT = Q.BSCS_ACCOUNT);
+
+SHOW ERROR
+
+GRANT SELECT ON CGSYSADM.SAP_ACCOUNTS_P TO SAMAPI;
+
+--------------------------------------------------------
+--  DDL for Synoyms
+
+
+--------------------------------------------------------
+
+CREATE OR REPLACE PUBLIC SYNONYM SAP_ACCOUNTS_P FOR CGSYSADM.SAP_ACCOUNTS_P;
+
+QUIT
+/
+

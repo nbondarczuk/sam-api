@@ -1,0 +1,19 @@
+{
+	"ServerIPAddress"       : "0.0.0.0",
+	"Port"                  : "8000",
+	"RunPath"               : ".",
+	"KeyPath"               : "keys",
+	"Debug"                 : "0",
+	"OracleDBUser"          : "SAMAPI",
+	"OracleDBPassword"      : "SAMAPI",
+	"OracleServiceName"     : "XE",
+	"AlertMailAddress"      : "root@localhost",
+	"AlertMailServerAddress": "localhost:25",
+	"AlertMailSenderAddress": "sam@localhost",
+	"JWTTokenValidHours"    : "1",
+	"LdapBase"              : "",
+	"LdapHost"              : "",
+	"LdapPort"              : "",
+	"LdapBindDN"            : "",
+	"Testing"               : "Y"	
+}

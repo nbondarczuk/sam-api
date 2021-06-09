@@ -1,0 +1,41 @@
+FROM registry1.corpo.t-mobile.pl/sam/centos-oracle-base
+
+LABEL name="sam-api"
+
+# build user environment
+ENV PORT=8080
+ENV EXEC=sam-api
+ENV USER=samapi
+ENV GROUPID=350
+ENV USERID=350
+RUN groupadd -r -g $GROUPID $USER && \
+	useradd -r -m -u $USERID -g $GROUPID $USER
+
+# set up paths
+ENV WORK=/work
+ENV LOG=$WORK/log
+ENV BIN=$WORK/bin
+ENV PATH=$WORK:$PATH
+RUN mkdir -p $WORK && \
+	mkdir -p $LOG && \
+	mkdir -p $BIN
+
+# copy local file to the container 
+WORKDIR $WORK
+COPY VERSION .
+COPY config .
+COPY config.json .
+COPY tnsnames.ora .
+COPY ldapcheck .
+RUN mkdir $WORK/keys/
+COPY keys/app.rsa $WORK/keys/
+COPY keys/app.rsa.pub $WORK/keys/
+COPY $EXEC $BIN/
+ENV RUNPATH $WORK
+ENV TNS_ADMIN $WORK
+RUN chown -R $USERID:$GROUPID $WORK
+EXPOSE $PORT
+
+# start the server
+USER $USER
+CMD ["/work/bin/sam-api"]

@@ -1,0 +1,19 @@
+{
+	"ServerIPAddress"       : "0.0.0.0",
+	"Port"                  : "8000",
+	"RunPath"               : ".",
+	"KeyPath"               : "keys",
+	"Debug"                 : "0",
+	"OracleDBUser"          : "SAMAPI",
+	"OracleDBPassword"      : "SAMAPI",
+	"OracleServiceName"     : "t17bill",
+	"AlertMailAddress"      : "GLM@t-mobile.pl",
+	"AlertMailServerAddress": "10.22.20.62:25",
+	"AlertMailSenderAddress": "samapi@localhost",
+	"JWTTokenValidHours"    : "99",
+	"LdapBase"              : "dc=corpo,dc=t-mobile,dc=pl",
+	"LdapHost"              : "",
+	"LdapPort"              : "389",
+	"LdapBindDN"            : "dc=corpo,dc=t-mobile,dc=pl",
+	"Testing"               : "Y"	
+}

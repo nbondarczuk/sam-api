@@ -1,0 +1,46 @@
+#!/bin/bash
+
+if test "$#" -eq 1 && test "$1" = "-h"; then
+	echo "Use: ldapcheck USERID PASSWORD GROUP"
+	exit 0
+fi
+
+if test "$#" -ne 3; then
+    echo "LDAPCHECK: Illegal number of parameters, expected: 3, got:" "$#"
+	exit 1
+fi
+
+USERID=$1
+PASSWORD=$2
+GROUP=$3
+SERVER="ldap://10.239.20.82"
+DC="dc=corpo,dc=t-mobile,dc=pl"
+STDOUT=/tmp/stdout.$USERID.$$
+STDERR=/tmp/stderr.$USERID.$$
+CMD=/usr/bin/ldapsearch
+
+n=0
+$CMD -v -H "$SERVER" -U "$USERID" -w "$PASSWORD" -b "$DC" "cn=$USERID" 2>$STDERR 1>$STDOUT
+RC=$?
+if test $RC -eq 0; then
+	n=$(grep $GROUP /tmp/stdout.$USERID.$$ | grep memberOf | wc -l)
+	if test $n -ne 1; then
+		if test -n "${DEBUG}"; then
+		   echo "LDAPCHECK: Group not found: " $GROUP
+		   cat $STDOUT | grep memberOf
+		fi
+		FRC=1
+	else
+		if test -n "${DEBUG}"; then
+			cat $STDOUT
+		fi
+	fi
+else
+	echo "LDAPCHECK: Error occured"
+	cat $STDERR
+	FRC=$?
+fi
+
+rm -f /tmp/*.$USERID.$$
+
+exit $FRC

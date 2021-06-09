@@ -1,0 +1,24 @@
+FROM centos
+
+LABEL name="centos-oracle-base"
+
+# get system done & up to date
+RUN yum update -y; yum clean all
+RUN yum install -y libaio
+RUN yum install -y unzip
+RUN yum install -y libnsl
+RUN yum install -y vim
+RUN yum install -y openldap openldap-clients
+RUN yum install -y cyrus-sasl-md5
+RUN yum clean all
+
+# install Instantclient Oracle 12.2
+ENV CLIENT_FILENAME instantclient_12_2.zip
+COPY ./addons/${CLIENT_FILENAME} .
+ENV LD_LIBRARY_PATH /usr/lib:/usr/local/lib:/usr/instantclient_12_2
+RUN unzip ${CLIENT_FILENAME} -d /usr &&  \
+    ln -s /usr/instantclient_12_2/libclntsh.so.12.1 /usr/instantclient_12_2/libclntsh.so && \
+    ln -s /usr/instantclient_12_2/libclntshcore.so.12.1 /usr/instantclient_12_2/libclntshcore.so && \
+    ln -s /usr/instantclient_12_2/libocci.so.12.1 /usr/instantclient_12_2/libocci.so
+RUN rm -f ${CLIENT_FILENAME}
+
