@@ -377,13 +377,13 @@ Usage of ./sam-api:
   -keypath string
     	Key path (default "keys")
   -ldapbase string
-    	LDAP base (default "dc=corpo,dc=t-mobile,dc=pl")
+    	LDAP base 
   -ldapbinddn string
-    	LDAP bind DN (default "ou=Uzytkownicy,ou=Standard,ou=Warszawa,dc=corpo,dc=t-mobile,dc=pl")
+    	LDAP bind DN 
   -ldaphost string
-    	LDAP host (default "corpo.t-mobile.pl")
+    	LDAP host 
   -ldapport string
-    	LDAP port (default "389")
+    	LDAP port
   -oracledbpassword string
     	Oracle DB password
   -oracledbuser string
@@ -391,11 +391,11 @@ Usage of ./sam-api:
   -oracleservicename string
     	Oracle service name
   -runpath string
-    	Run path (default ".")
+    	Run path 
   -serveripaddress string
-    	Server address (default "0.0.0.0")
+    	Server address 
   -serverport string
-    	Server port (default "8000")
+    	Server port 
   -v	Version check
 ```
 
