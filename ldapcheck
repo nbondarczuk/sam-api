@@ -13,8 +13,8 @@ fi
 USERID=$1
 PASSWORD=$2
 GROUP=$3
-SERVER="ldap://10.239.20.82"
-DC="dc=corpo,dc=t-mobile,dc=pl"
+SERVER="ldap://1.2.3.4"
+DC="dc=xxxx,dc=xxx,dc=xx"
 STDOUT=/tmp/stdout.$USERID.$$
 STDERR=/tmp/stderr.$USERID.$$
 CMD=/usr/bin/ldapsearch
